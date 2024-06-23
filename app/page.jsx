@@ -13,7 +13,7 @@ import styled from "styled-components";
 
 export default function Home() {
   return (
-    <>
+    <Layout>
       <Canvas style={{ position: "absolute" }}>
         <ambientLight />
         <ScrollControls pages={4} damping={0.2}>
@@ -24,7 +24,7 @@ export default function Home() {
           </Scroll>
         </ScrollControls>
       </Canvas>
-    </>
+    </Layout>
   );
 }
 
@@ -47,38 +47,65 @@ function Scene() {
 
 function Over() {
   const scroll = useScroll();
-  const [scrollData, setScrollData] = useState(scroll.offset * 3 + 1);
   const test1 = useRef(null);
   const test2 = useRef(null);
   const test3 = useRef(null);
   const test4 = useRef(null);
+  const [page, setpage] = useState(1);
 
   const scrollToSection = (elementRef) => {
     scroll.el.scrollTo({
       top: elementRef.current.offsetTop,
-      behavior: "smooth",
+      behavior: "auto",
     });
   };
 
   useFrame(() => {
-    setScrollData(scroll.offset * 3 + 1); // 현재 스크롤 오프셋을 콘솔에 출력
-  });
+    const scrollData = scroll.offset * 3 + 1;
 
-  useEffect(() => {
-    if (scrollData >= 1.01 && scrollData < 1.1) {
-      scrollToSection(test2);
-    } 
-    
-    else if (scrollData >= 2.01 && scrollData < 2.1) {
-      scrollToSection(test3);
-    } 
-    
-    else if (scrollData >= 3.01 && scrollData < 3.1) {
-      scrollToSection(test4);
+    if (page == 1) {
+      if (scrollData >= page + 0.01 && scrollData < page + 0.1) {
+        scrollToSection(test2);
+      }
+    } else if (page == 2) {
+      if (scrollData >= page + 0.01 && scrollData < page + 0.1) {
+        scrollToSection(test3);
+      } else if (scrollData <= page - 0.01 && scrollData > page - 0.1) {
+        scrollToSection(test1);
+      }
+    } else if (page == 3) {
+      if (scrollData >= page + 0.01 && scrollData < page + 0.1) {
+        scrollToSection(test4);
+      } else if (scrollData <= page - 0.01 && scrollData > page - 0.1) {
+        scrollToSection(test2);
+      }
+    } else if (page == 4) {
+      if (scrollData <= page - 0.01 && scrollData > page - 0.1) {
+        scrollToSection(test3);
+      }
     }
 
-    console.log(scrollData);
-  }, [scrollData]);
+    if (scrollData == 1) {
+      setpage(1);
+    } else if (scrollData == 2) {
+      setpage(2);
+    } else if (scrollData == 3) {
+      setpage(3);
+    } else if (scrollData == 4) {
+      setpage(4);
+    }
+
+    if (
+      scrollData !== 1 &&
+      scrollData !== 2 &&
+      scrollData !== 3 &&
+      scrollData !== 4
+    ) {
+      scroll.el.style.overflow = "hidden";
+    } else {
+      scroll.el.style.overflow = "auto";
+    }
+  });
 
   return (
     <>
@@ -99,6 +126,7 @@ function Over() {
 }
 
 const Layout = styled.div`
-  height: 100vh;
-  width: 100%;
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `;
