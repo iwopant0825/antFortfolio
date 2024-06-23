@@ -64,23 +64,23 @@ function Over() {
     const scrollData = scroll.offset * 3 + 1;
 
     if (page == 1) {
-      if (scrollData >= page + 0.01 && scrollData < page + 0.1) {
+      if (scrollData >= page + 0.0001 && scrollData < page + 0.8) {
         scrollToSection(test2);
       }
     } else if (page == 2) {
-      if (scrollData >= page + 0.01 && scrollData < page + 0.1) {
+      if (scrollData >= page + 0.0001 && scrollData < page + 0.8) {
         scrollToSection(test3);
-      } else if (scrollData <= page - 0.01 && scrollData > page - 0.1) {
+      } else if (scrollData <= page - 0.0001 && scrollData > page - 0.8) {
         scrollToSection(test1);
       }
     } else if (page == 3) {
-      if (scrollData >= page + 0.01 && scrollData < page + 0.1) {
+      if (scrollData >= page + 0.0001 && scrollData < page + 0.8) {
         scrollToSection(test4);
-      } else if (scrollData <= page - 0.01 && scrollData > page - 0.1) {
+      } else if (scrollData <= page - 0.0001 && scrollData > page - 0.8) {
         scrollToSection(test2);
       }
     } else if (page == 4) {
-      if (scrollData <= page - 0.01 && scrollData > page - 0.1) {
+      if (scrollData <= page - 0.0001 && scrollData > page - 0.8) {
         scrollToSection(test3);
       }
     }
