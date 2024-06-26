@@ -15,8 +15,7 @@ export default function Home() {
   const [sceneAn, setSceneAn] = useState(1)
   return (
     <Layout>
-      <Canvas style={{ position: "absolute" }}>
-        <ambientLight />
+      <Canvas shadows style={{ position: "absolute" }}>
         <ScrollControls pages={5} damping={0.2}>
           <ScrollManager />
           <Scene sceneAn={sceneAn}/>
