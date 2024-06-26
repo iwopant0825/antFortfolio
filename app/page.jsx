@@ -1,7 +1,6 @@
 "use client";
 
 import {
-  OrbitControls,
   Scroll,
   ScrollControls,
 } from "@react-three/drei";
